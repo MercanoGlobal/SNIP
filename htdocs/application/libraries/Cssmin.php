@@ -60,7 +60,9 @@
 */
  
  class cssmin {
- 	
+
+ 	public $relativePath;
+
  	public function __construct()
  	{
  		log_message('debug', 'CSSMin library initialized.');
