@@ -62,9 +62,11 @@ if(isset($insert)){
 
 <div class="paste">
 	<div class="text_formatted">
-		<div class="container" id="code">
-			<?php echo $paste; ?>
-		</div>
+		<?php if(config_item('js_editor') == 'codemirror' || config_item('js_editor') == 'ace'): ?>
+			<textarea class="container" id="code" readonly="readonly"><?php echo strip_tags($paste); ?></textarea>
+		<?php else: ?>
+			<div class="container" id="code"><?php echo $paste; ?></div>
+		<?php endif; ?>
 	</div>
 </div>
 

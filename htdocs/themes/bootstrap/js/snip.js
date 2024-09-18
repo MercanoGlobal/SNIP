@@ -127,23 +127,32 @@ ST.crypto = function () {
     $('button[name=submit]').after('&nbsp;&nbsp;<button type="submit" id="create_encrypted" class="btn btn-large btn-success"> <i class="icon-lock icon-white"></i> Create encrypted</button>');
     $('#create_encrypted').on('click', function () {
         var $code = $('#code');
+        var content = '';
 
-        // Check if the Paste textarea is empty
-        if ($code.val().trim() === '') {
+        // Check if CodeMirror is enabled and initialized
+        if (typeof ST.cm_editor !== 'undefined') {
+            // Get content from CodeMirror editor
+            content = ST.cm_editor.getValue();
+        } else {
+            // Fallback to regular textarea
+            content = $code.val();
+        }
+
+        // Check if the Paste textarea or CodeMirror is empty
+        if (content.trim() === '') {
             $code.css('border', '2px solid red'); // Highlight the Paste text field in red
             return false; // Prevent further execution if the textarea is empty
         }
 
         // The textarea has content, proceed with encryption
         var key = ST.crypto_generate_key(32);
-        var plaintext = $code.val();
-        plaintext = LZString.compressToBase64(plaintext);
-        var encrypted = CryptoJS.AES.encrypt(plaintext, key) + '';
+        var plaintext = LZString.compressToBase64(content);
+        var encrypted = CryptoJS.AES.encrypt(plaintext, key).toString();
 
-        // linebreak after 100 chars
+        // Linebreak after 100 chars for the encrypted output
         encrypted = encrypted.replace(/(.{100})/g, "$1\n");
 
-        // post request via JS
+        // Post request via JS
         $.post(base_url + 'post_encrypted', {
             'name': $('#name').val(),
             'title': $('#title').val(),
@@ -153,46 +162,53 @@ ST.crypto = function () {
             'captcha': $('#captcha').val(),
             'reply': $('input[name=reply]').val()
         },
-            function (redirect_url) {
-                if (redirect_url.indexOf('E_CAPTCHA') > -1) {
-                    $('.container .message').remove();
-                    $('.container:eq(1)').prepend('<div class="message error"><div class="container">The captcha is incorrect.</div></div>');
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth' // Adds smooth scrolling
-                    });
-                } else if (redirect_url.indexOf('invalid') > -1) {
-                    // burn on read
-                    redirect_url = redirect_url.replace('" /><!-- behind you -->', '#' + key + '" />')
-                    $('#create_encrypted').parent().html('<p>' + redirect_url + '</p>');
-                } else {
-                    window.location.href = base_url + redirect_url + '#' + key;
-                }
-            });
+        function (redirect_url) {
+            if (redirect_url.indexOf('E_CAPTCHA') > -1) {
+                $('.container .message').remove();
+                $('.container:eq(1)').prepend('<div class="message error"><div class="container">The captcha is incorrect.</div></div>');
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth' // Adds smooth scrolling
+                });
+            } else if (redirect_url.indexOf('invalid') > -1) {
+                // Burn on read
+                redirect_url = redirect_url.replace('" /><!-- behind you -->', '#' + key + '" />');
+                $('#create_encrypted').parent().html('<p>' + redirect_url + '</p>');
+            } else {
+                window.location.href = base_url + redirect_url + '#' + key;
+            }
+        });
 
         return false;
     });
 
-    // decryption routine
-    w_href = window.location.href;
+    // Decryption routine
+    var w_href = window.location.href;
     if (w_href.indexOf('#') > -1) {
-        key = w_href.split('#')[1];
+        var key = w_href.split('#')[1];
         var re = new RegExp('^L[0-9].*?$');
         var r = key.match(re);
         if (key.indexOf('-') > -1 || r) {
-            // line highlighter
+            // Line highlighter
         } else {
             try {
                 var $code = $('#code');
                 var encrypted = $code.text().replace(/[^A-Za-z0-9+\/=]/g, '');
-                var decrypted = CryptoJS.AES.decrypt(encrypted, key).toString(CryptoJS.enc.Utf8) + '';
+                var decrypted = CryptoJS.AES.decrypt(encrypted, key).toString(CryptoJS.enc.Utf8);
                 decrypted = LZString.decompressFromBase64(decrypted);
-                $code.val(decrypted);
 
-                // add a breaking_space after 90 chars (for later)
+                if (typeof ST.cm_editor !== 'undefined') {
+                    // Set decrypted content to CodeMirror
+                    ST.cm_editor.setValue(decrypted);
+                } else {
+                    // Set decrypted content to regular textarea
+                    $code.val(decrypted);
+                }
+
+                // Add a breaking_space after 90 chars (for later)
                 decrypted = decrypted.replace(/(.{90}.*?) /g, "$1{{{breaking_space}}}");
 
-                // remove html entities
+                // Remove HTML entities
                 decrypted = decrypted
                     .replace(/&/g, '&amp;')
                     .replace(/"/g, '&quot;')
@@ -201,11 +217,12 @@ ST.crypto = function () {
                     .replace(/>/g, '&gt;')
                     .replace(/ /g, '&nbsp;')
                     .replace(/{{{breaking_space}}}/g, ' ')
-                    .replace(/\n/g, '<br />')
+                    .replace(/\n/g, '<br />');
 
+                // Display decrypted content (for formatted output)
                 $('.row .span12 .CodeMirror').html(decrypted);
 
-                // kick out potential dangerous and unnecessary stuff
+                // Hide unnecessary elements
                 $('.text_formatted').css('background', '#efe');
                 $('.replies').hide();
                 for (var i = 2; i <= 7; i++) {
@@ -213,7 +230,9 @@ ST.crypto = function () {
                 }
                 $('.meta .spacer:first').hide();
                 $('.qr').hide();
-            } catch (e) { }
+            } catch (e) {
+                console.error('Decryption failed: ', e);
+            }
         }
     }
 }

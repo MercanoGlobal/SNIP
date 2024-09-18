@@ -75,7 +75,11 @@ if(isset($insert)){
 <section>
 	<div class="row">
 		<div class="span12">
-			<blockquote class="CodeMirror" id="code"><?php echo $paste; ?></blockquote>
+			<?php if(config_item('js_editor') == 'codemirror' || config_item('js_editor') == 'ace'): ?>
+				<textarea class="CodeMirror" id="code" readonly="readonly"><?php echo strip_tags($paste); ?></textarea>
+			<?php else: ?>
+				<blockquote class="CodeMirror" id="code"><?php echo $paste; ?></blockquote>
+			<?php endif; ?>
 		</div>
 	</div>
 </section>
