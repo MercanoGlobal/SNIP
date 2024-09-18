@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./htdocs:/htdocs:ro
+    depends_on:
+      - mysql
+      - php
+    ports:
+      - 8075:80
+
+  php:
+    image: snip-php:1
+    volumes:
+      - ./docker/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./docker/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf:ro
+      - ./htdocs:/htdocs
+      - ./docker/snip.php:/htdocs/application/config/snip.php:ro
+    depends_on:
+      - mysql
+    build:
+      context: ./docker/php
+
+  mysql:
+    image: mariadb:11
+    command: mariadbd --innodb-buffer-pool-size=4G
+    volumes:
+      - ./mariadb_data:/var/lib/mysql
+    environment:
+      # MARIADB_ROOT_PASSWORD: root
+      MARIADB_RANDOM_ROOT_PASSWORD: 1
+      MARIADB_DATABASE: snip
+      MARIADB_USER: snip
+      MARIADB_PASSWORD: snip
