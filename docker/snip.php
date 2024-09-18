@@ -8,11 +8,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | Name and URL of the project, that will appear in the website footer.
 |
-|	https://github.com/MercanoG/SNIP
+|	https://github.com/MercanoGlobal/SNIP
 |
 */
 $config['proj_name'] = 'SNIP';
-$config['proj_url'] = 'https://github.com/MercanoG/SNIP';
+$config['proj_url'] = 'https://github.com/MercanoGlobal/SNIP';
 
 
 /*
@@ -66,7 +66,7 @@ $config['db_database'] = 'snip';
 $config['db_username'] = 'snip';
 $config['db_password'] = 'snip';
 
-$config['db_driver'] = 'mysqli';
+$config['db_driver'] = 'mysqli'; // Currently supported database engines: mysqli (MySQL), postgre (PostgreSQL) or sqlite (SQLite)
 
 // If you are using SQLite, comment the above 'mysqli' and uncomment the configuration lines below:
 //$config['db_database'] = 'db/snip'; // you need to create a directory "db" and give the webserver write access. SQLite needs a writable folder to work properly!
@@ -80,6 +80,8 @@ $config['db_driver'] = 'mysqli';
  * Use underscore as suffix to easily see the tables.
  * example: $config['db_prefix'] = 'snip_';
  * use $config['db_prefix'] = ''; if you don't want to use table prefix.
+ *
+ * Currently, the PostgreSQL implementation doesn't support table prefixes, so you should keep this option empty if using PostgreSQL.
  *
  */
 $config['db_prefix'] = '';

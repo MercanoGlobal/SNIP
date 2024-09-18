@@ -8,11 +8,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | Name and URL of the project, that will appear in the website footer.
 |
-|	https://github.com/MercanoG/SNIP
+|	https://github.com/MercanoGlobal/SNIP
 |
 */
 $config['proj_name'] = 'SNIP';
-$config['proj_url'] = 'https://github.com/MercanoG/SNIP';
+$config['proj_url'] = 'https://github.com/MercanoGlobal/SNIP';
 
 
 /*

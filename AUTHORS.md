@@ -70,4 +70,4 @@
 * Krayon https://github.com/krayon (Stiqued)
 * Borys Vrublevskyi https://github.com/BorysVrublevskyi (Docker updates)
 * TehPeGaSuS https://github.com/TehPeGaSuS (Some theme updates)
-* MercanoGlobal https://github.com/MercanoG (SNIP - Major refactoring of the entire system)
+* MercanoGlobal https://github.com/MercanoGlobal (SNIP - Major refactoring of the entire system)

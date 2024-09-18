@@ -1,7 +1,7 @@
 SNIP troubleshooting guide
 -----------------------------
 
-First, be sure to double-check whether you meet the [prerequisites](//github.com/MercanoG/SNIP#prerequisites).
+First, be sure to double-check whether you meet the [prerequisites](//github.com/MercanoGlobal/SNIP#prerequisites).
 
 ### Apache
 
@@ -56,4 +56,4 @@ You need to have the GD extension for PHP installed and enabled so that the QR c
 Still have a problem?
 ---------------------
 
-Report the issue [on GitHub](//github.com/MercanoG/SNIP/issues), and we will add it to this guide, if necessary.
+Report the issue [on GitHub](//github.com/MercanoGlobal/SNIP/issues), and we will add it to this guide, if necessary.

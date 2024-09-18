@@ -25,7 +25,7 @@ Here are some features:
 Check it out
 ------------
 
-<img src="https://raw.githubusercontent.com/MercanoG/SNIP/main/doc/snip_demo.png" alt="SNIP"></a>
+<img src="https://raw.githubusercontent.com/MercanoGlobal/SNIP/main/doc/snip_demo.png" alt="SNIP"></a>
 
 
 Prerequisites
@@ -40,7 +40,7 @@ Prerequisites
 Installation
 ------------
 
-1. Download SNIP from https://github.com/MercanoG/SNIP/releases
+1. Download SNIP from https://github.com/MercanoGlobal/SNIP/releases
 2. Create a user and database for SNIP
 3. Copy application/config/snip.php.dist to application/config/snip.php
 4. Edit configuration settings in application/config/snip.php - everything is described there
