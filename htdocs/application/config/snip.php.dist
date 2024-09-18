@@ -66,11 +66,10 @@ $config['db_database'] = 'snip';
 $config['db_username'] = 'snip';
 $config['db_password'] = 'snip';
 
-$config['db_driver'] = 'mysqli';
+$config['db_driver'] = 'mysqli'; // Currently supported database types: mysqli (MySQL), postgre (PostgreSQL) or sqlite (SQLite)
 
-// If you are using SQLite, comment the above 'mysqli' and uncomment the configuration lines below:
+// If you are using SQLite above, uncomment the line below:
 //$config['db_database'] = 'db/snip'; // you need to create a directory "db" and give the webserver write access. SQLite needs a writable folder to work properly!
-//$config['db_driver'] = 'sqlite';
 
 
 /**
