@@ -297,6 +297,15 @@ $config['disable_recent'] = false;
 $config['disable_trends'] = false;
 $config['disable_about'] = false;
 
+/**
+ * Banner settings (currently only supported by stikkedizr theme)
+ **/
+// Banner message
+$config['banner_message'] = '<center><strong>NOTE:</strong> Data may be deleted anytime. Kittens will die if you abuse this service.';
+// Set this to false to show the banner
+$config['disable_banner'] = false;
+
+
 
 /**
  * Anti spam
