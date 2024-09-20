@@ -66,11 +66,10 @@ $config['db_database'] = 'snip';
 $config['db_username'] = 'snip';
 $config['db_password'] = 'snip';
 
-$config['db_driver'] = 'mysqli'; // Currently supported database engines: mysqli (MySQL), postgre (PostgreSQL) or sqlite (SQLite)
+$config['db_driver'] = 'mysqli'; // Currently supported database engines: mysqli (MySQL/MariaDB), postgre (PostgreSQL) or sqlite (SQLite)
 
-// If you are using SQLite, comment the above 'mysqli' and uncomment the configuration lines below:
+// If you are using SQLite, uncomment the configuration line below:
 //$config['db_database'] = 'db/snip'; // you need to create a directory "db" and give the webserver write access. SQLite needs a writable folder to work properly!
-//$config['db_driver'] = 'sqlite';
 
 
 /**
@@ -80,8 +79,6 @@ $config['db_driver'] = 'mysqli'; // Currently supported database engines: mysqli
  * Use underscore as suffix to easily see the tables.
  * example: $config['db_prefix'] = 'snip_';
  * use $config['db_prefix'] = ''; if you don't want to use table prefix.
- *
- * Currently, the PostgreSQL implementation doesn't support table prefixes, so you should keep this option empty if using PostgreSQL.
  *
  */
 $config['db_prefix'] = '';

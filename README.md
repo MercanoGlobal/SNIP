@@ -42,9 +42,10 @@ Installation
 
 1. Download SNIP from https://github.com/MercanoGlobal/SNIP/releases
 2. Create a user and database for SNIP
-3. Copy application/config/snip.php.dist to application/config/snip.php
-4. Edit configuration settings in application/config/snip.php - everything is described there
-5. You're done!
+3. Upload the contents of the htdocs folder to your web host
+4. Copy application/config/snip.php.dist to application/config/snip.php
+5. Edit configuration settings in application/config/snip.php - everything is described there
+6. You're done!
 
 * The database structure will be created automatically if it doesn't exist.
 * No special file permissions are needed by default. Optional: If you want to have the JavaScript and CSS files minified, the static/asset/ folder has to be writable.
@@ -91,11 +92,6 @@ Changelog
 
 #### Upgrade Notice
 
-Note that, due to the vast amount of modifications, compatibility with older versions isn't guaranteed. Please test on a dev instance first.
+Note that, due to the vast amount of modifications, compatibility with older versions isn't guaranteed. Please backup & test on a dev instance first.
 
-Run the following SQL query in your database to add support for file attachments:
-
-```sql
-ALTER TABLE `pastes`
-ADD COLUMN `file` VARCHAR(255) NULL AFTER `hits_updated`;
-```
+Copy your application/config/snip.php config file away. Upload the new version. Copy it back.

@@ -26,7 +26,10 @@ class Main extends CI_Controller
             $this->use_recaptcha = true;
         }
 
-        if (!$this->db->table_exists('sessions')) {
+        //get the DB prefix if set
+        $db_prefix = config_item('db_prefix');
+
+        if (!$this->db->table_exists($db_prefix . 'sessions')) {
             $this->load->dbforge();
 
             if ($this->db->table_exists('ci_sessions')) {
@@ -59,10 +62,10 @@ class Main extends CI_Controller
             $this->dbforge->create_table('sessions', true);
         }
 
-        // load this after db has been initialized
+        //load this after db has been initialized
         $this->load->library('session');
 
-        if (!$this->db->table_exists('pastes')) {
+        if (!$this->db->table_exists($db_prefix . 'pastes')) {
             $this->load->dbforge();
             $fields = array(
                 'id' => array(
@@ -151,7 +154,7 @@ class Main extends CI_Controller
             $this->dbforge->create_table('pastes', true);
         }
 
-        if (!$this->db->table_exists('blocked_ips')) {
+        if (!$this->db->table_exists($db_prefix . 'blocked_ips')) {
             $this->load->dbforge();
             $fields = array(
                 'ip_address' => array(
@@ -174,7 +177,7 @@ class Main extends CI_Controller
             $this->dbforge->create_table('blocked_ips', true);
         }
 
-        if (!$this->db->table_exists('trending')) {
+        if (!$this->db->table_exists($db_prefix . 'trending')) {
             $this->load->dbforge();
             $fields = array(
                 'paste_id' => array(
@@ -198,7 +201,7 @@ class Main extends CI_Controller
             $this->dbforge->create_table('trending', true);
         }
 
-        if (!$this->db->field_exists('ip_address', 'pastes')) {
+        if (!$this->db->field_exists('ip_address', $db_prefix . 'pastes')) {
             $this->load->dbforge();
             $fields = array(
                 'ip_address' => array(
@@ -210,7 +213,7 @@ class Main extends CI_Controller
             $this->dbforge->add_column('pastes', $fields);
         }
 
-        if (!$this->db->field_exists('hits', 'pastes')) {
+        if (!$this->db->field_exists('hits', $db_prefix . 'pastes')) {
             $this->load->dbforge();
             $fields = array(
                 'hits' => array(
@@ -229,11 +232,10 @@ class Main extends CI_Controller
             $this->dbforge->add_column('pastes', $fields);
         }
 
-        //ipv6 migration
-        $fields = $this->db->field_data('trending');
+        //IPv6 migration
+        $fields = $this->db->field_data($db_prefix . 'trending');
 
         if (stristr(config_item('db_driver'), 'sqlite') === false && $fields[1]->max_length < 45) {
-            $db_prefix = config_item('db_prefix');
 
             if ($this->db->dbdriver == "postgre") {
                 $this->db->query("ALTER TABLE " . $db_prefix . "trending ALTER COLUMN ip_address TYPE VARCHAR(45), ALTER COLUMN ip_address SET NOT NULL, ALTER COLUMN ip_address SET DEFAULT '0'");
@@ -249,13 +251,12 @@ class Main extends CI_Controller
         }
 
         //expand title to 50
-        $fields = $this->db->field_data('pastes');
+        $fields = $this->db->field_data($db_prefix . 'pastes');
         foreach ($fields as $field) {
 
             if ($field->name == 'title') {
 
                 if (stristr(config_item('db_driver'), 'sqlite') === false && $field->max_length < 50) {
-                    $db_prefix = config_item('db_prefix');
 
                     if ($this->db->dbdriver == "postgre") {
                         $this->db->query("ALTER TABLE " . $db_prefix . "pastes ALTER COLUMN title TYPE VARCHAR(50), ALTER COLUMN title SET NOT NULL");
@@ -267,24 +268,33 @@ class Main extends CI_Controller
         }
 
         //upgrade to CI 3.1.2
-        $fields = $this->db->field_data('sessions');
+        $fields = $this->db->field_data($db_prefix . 'sessions');
         foreach ($fields as $field) {
 
             if ($field->name == 'id') {
 
-                if (stristr(config_item('db_driver'), 'sqlite') === false) {
+                if (stristr(config_item('db_driver'), 'sqlite') === false && $field->max_length < 128) {
 
-                    if ($field->max_length < 128) {
-                        $db_prefix = config_item('db_prefix');
-
-                        if ($this->db->dbdriver == "postgre") {
-                            $this->db->query("ALTER TABLE " . $db_prefix . "sessions ALTER COLUMN id SET DATA TYPE varchar(128)");
-                        } else {
-                            $this->db->query("ALTER TABLE " . $db_prefix . "sessions CHANGE id id VARCHAR(128) NOT NULL");
-                        }
+                    if ($this->db->dbdriver == "postgre") {
+                        $this->db->query("ALTER TABLE " . $db_prefix . "sessions ALTER COLUMN id SET DATA TYPE varchar(128)");
+                    } else {
+                        $this->db->query("ALTER TABLE " . $db_prefix . "sessions CHANGE id id VARCHAR(128) NOT NULL");
                     }
                 }
             }
+        }
+
+        //upgrade to SNIP v1.0.0
+        if (!$this->db->field_exists('file', $db_prefix . 'pastes')) {
+            $this->load->dbforge();
+            $fields = array(
+                'file' => array(
+                    'type' => 'VARCHAR',
+                    'constraint' => 255,
+                    'null' => true,
+                ),
+            );
+            $this->dbforge->add_column('pastes', $fields);
         }
     }
 
