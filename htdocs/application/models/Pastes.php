@@ -119,7 +119,7 @@ class Pastes extends CI_Model
         }
 
         if ($this->input->post('snipurl') == false) {
-            $data['snipurl'] = false;
+            $data['snipurl'] = NULL;
         } else {
             $url = $this->_get_url($data['pid']);
             $shorturl = $this->_shorten_url($url);

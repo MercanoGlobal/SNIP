@@ -114,7 +114,7 @@ class Main extends CI_Controller
                 'snipurl' => array(
                     'type' => 'VARCHAR',
                     'constraint' => 64,
-                    'default' => 0,
+                    'null' => true,
                 ),
                 'replyto' => array(
                     'type' => 'VARCHAR',
@@ -295,6 +295,23 @@ class Main extends CI_Controller
                 ),
             );
             $this->dbforge->add_column('pastes', $fields);
+        }
+
+        //SNIP v1.0.0 - upgrade to modify 'snipurl' column and convert 0 to NULL for PostgreSQL support
+        if ($this->db->field_exists('snipurl', $db_prefix . 'pastes')) {
+            $this->load->dbforge();
+
+            $fields = array(
+                'snipurl' => array(
+                    'type' => 'VARCHAR',
+                    'constraint' => 64,
+                    'null' => true,
+                ),
+            );
+
+            $this->dbforge->modify_column('pastes', $fields);
+            $this->db->where('snipurl', '0');
+            $this->db->update('pastes', array('snipurl' => NULL));
         }
     }
 

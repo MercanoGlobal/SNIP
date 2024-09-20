@@ -39,9 +39,9 @@ if(isset($insert)){
 						- <a href="<?php echo $url; ?>"><?php echo lang('paste_goback'); ?></a>
 					<?php } ?>
 					<div class="detail"><span class="item"><?php echo lang('paste_url'); ?> </span><a href="<?php echo $url; ?>"><?php echo $url; ?></a></div>
-					<?php if(!empty($snipurl)){?>
-						<div class="detail"><div class="item"><?php echo lang('paste_shorturl');?> </div><a href="<?php echo $snipurl; ?>"><?php echo htmlspecialchars($snipurl) ?></a></div>
-					<?php }?>
+					<?php if(!empty($snipurl)) { ?>
+						<div class="detail"><div class="item"><?php echo lang('paste_shorturl');?> <a href="<?php echo $snipurl; ?>"><?php echo htmlspecialchars($snipurl) ?></a></div></div>
+					<?php } ?>
 					<div class="detail"><span class="item"><?php echo lang('paste_embed'); ?> </span><input data-lang-showcode="<?php echo lang('paste_showcode'); ?>" id="embed_field" type="text" value="<?php echo htmlspecialchars('<iframe src="' . site_url('view/embed/' . $pid) . '" style="border:none;width:100%"></iframe>'); ?>" /></div>
 
 					<div class="detail">
