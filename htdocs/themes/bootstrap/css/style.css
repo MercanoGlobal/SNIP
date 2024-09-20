@@ -153,3 +153,29 @@ table.table thead .sorting_desc_disabled { background: url('../images/sort_desc_
 	margin-bottom: 0;
 	padding: 18px 20px 7px;
 }
+
+.alert-banner {
+	background: #606c88;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #3f4c6b, #606c88);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #3f4c6b, #606c88); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	color: #fff;
+	padding: 15px;
+	margin-top: 20px;
+	text-align: left;
+	border-radius: 4px;
+	box-shadow: inset 0 1px 0 rgba(255,255,255,.25),0 1px 2px rgba(0,0,0,.05);
+}
+
+.alert-banner h3 {
+	font-size: 15px;
+	text-shadow: 0 1px 0 rgba(255,255,255,.2);
+}
+
+@media (max-width: 768px) {
+	.alert-banner {
+		margin-top: 5px;
+	}
+	.alert-banner h3 {
+		font-size: 13px;
+	}
+}

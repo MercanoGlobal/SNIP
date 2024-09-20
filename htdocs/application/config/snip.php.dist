@@ -98,6 +98,18 @@ $config['theme'] = 'bootstrap';
 
 
 /**
+ * Alert Banner
+ *
+ * Display an alert banner on every page
+ * The banner is multilingual, and its text can be modified in application/language/english/snip_lang.php
+ * The banner design and position can be modified in each teme's style.css and header.php
+ * Available Themes: bootstrap, bootstrap4, stikkedizr, i386
+ *
+ */
+$config['alert_banner'] = true;
+
+
+/**
  * Display QR code
  *
  * Whether or not to display the QR code

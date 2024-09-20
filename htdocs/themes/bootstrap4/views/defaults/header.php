@@ -95,6 +95,15 @@ $searchparams = str_replace('"', '&quot;', $searchparams);
                 </div>
             </nav>
 
+			<?php if ($this->config->item('alert_banner')) { ?>
+				<!-- Alert Banner -->
+				<div class="container">
+					<div class="alert-banner">
+						<h3><?php echo lang('alert_banner'); ?></h3>
+					</div>
+				</div>
+			<?php } ?>
+
 			<div class="content">
 				<div class="container">
 					<?php if(isset($status_message)) { ?>

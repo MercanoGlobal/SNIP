@@ -87,6 +87,15 @@ $searchparams = ($this->input->get('search') ? '?search=' . $this->input->get('s
 			</nav>
 		</header>
 
+		<?php if ($this->config->item('alert_banner')) { ?>
+			<!-- Alert Banner -->
+			<div class="container">
+				<div class="alert-banner">
+					<h3><?php echo lang('alert_banner'); ?></h3>
+				</div>
+			</div>
+		<?php } ?>
+
 		<div class="container">
 				<?php if(isset($status_message)){ ?>
 				<div class="message success change">
