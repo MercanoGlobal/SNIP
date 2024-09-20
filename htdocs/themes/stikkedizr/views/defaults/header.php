@@ -87,6 +87,17 @@ $searchparams = ($this->input->get('search') ? '?search=' . $this->input->get('s
 			</nav>
 		</header>
 
+		<!-- New Banner Section -->
+                <?php if (!$this->config->item('disable_banner') && !empty($this->config->item('banner_message'))) { ?>
+                        <div class="banner" style="margin-top: 20px; padding: 10px 0;">
+                                <div class="container">
+                                        <div class="alert alert-info" role="alert" style="margin-bottom: 0;">
+                                                <?php echo $this->config->item('banner_message'); ?>
+                                        </div>
+                                </div>
+                        </div>
+                <?php } ?>
+
 		<div class="container">
 				<?php if(isset($status_message)){ ?>
 				<div class="message success change">
