@@ -54,6 +54,7 @@ if(isset($insert)) {
 								<a class="a2a_button_x"></a>
 								<a class="a2a_button_whatsapp"></a>
 								<a class="a2a_button_email"></a>
+								<a class="a2a_button_copy_link"></a>
 							</span>
 							<script async src="https://static.addtoany.com/menu/page.js"></script>
 						<!-- AddToAny END -->
