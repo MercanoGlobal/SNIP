@@ -110,6 +110,16 @@ $config['alert_banner'] = true;
 
 
 /**
+ * Alert Footer
+ *
+ * Display an alert footer on every page (regular message)
+ * The footer is multilingual, and its text can be modified in application/language/english/snip_lang.php
+ * Available Themes: bootstrap, bootstrap4, cleanwhite, default, geocities, i386, stikkedizr
+ */
+$config['alert_footer'] = false;
+
+
+/**
  * Display QR code
  *
  * Whether or not to display the QR code
