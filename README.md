@@ -94,4 +94,4 @@ Changelog
 
 Note that, due to the vast amount of modifications, compatibility with older versions isn't guaranteed. Please backup & test on a dev instance first.
 
-Copy your application/config/snip.php config file away. Upload the new version. Copy it back.
+Copy your application/config/stikked.php - stiqued.php config file away. Upload the new version. Compare the differences between stikked.php - stiqued.php and the new snip.php, and make the necessary adjustments.
