@@ -7,7 +7,7 @@
  * Release Version: 1.0.9.1
  * Date Started: 2014/07/15
  *
- * Nimrod language file for GeSHi.
+ * Nim language file for GeSHi.
  *
  * CHANGES
  * -------
@@ -39,7 +39,7 @@
  ************************************************************************************/
 
 $language_data = array (
-    'LANG_NAME' => 'Nimrod',
+    'LANG_NAME' => 'Nim',
     'COMMENT_SINGLE' => array(1 => '#'),
     'COMMENT_MULTI' => array(),
     'CASE_KEYWORDS' => GESHI_CAPS_NO_CHANGE,
@@ -55,7 +55,7 @@ $language_data = array (
 
         /*
         ** Set 1: reserved words
-        ** http://nimrod-lang.org/manual.html#identifiers-keywords
+        ** https://nim-lang.org/docs/manual.html#lexical-analysis-identifiers-amp-keywords
         */
         1 => array(
             'addr', 'and', 'as', 'asm', 'atomic',

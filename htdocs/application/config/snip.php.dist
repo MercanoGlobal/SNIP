@@ -102,7 +102,7 @@ $config['theme'] = 'bootstrap';
  *
  * Display an alert banner on every page
  * The banner is multilingual, and its text can be modified in application/language/english/snip_lang.php
- * The banner design and position can be modified in each teme's style.css and header.php
+ * The banner design and position can be modified in each theme's style.css and header.php
  * Available Themes: bootstrap, bootstrap4, stikkedizr, i386
  *
  */
