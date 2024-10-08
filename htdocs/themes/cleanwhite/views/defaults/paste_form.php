@@ -54,7 +54,7 @@
 			<?php if($this->config->item('enable_captcha') && $this->session->userdata('is_human') === null){ ?>
 						<div class="item item_captcha">
 							<label for="captcha"><?php echo lang('paste_spam'); ?>
-								<span class="instruction"><?php echo lang('paste_spam_desc'); ?></span>
+								<span class="instruction"><?php if(!$use_recaptcha) { echo lang('paste_spam_desc'); } ?></span>
 							</label>
 			<?php if($use_recaptcha){
 			    echo recaptcha_get_html($recaptcha_publickey);

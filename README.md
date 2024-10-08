@@ -51,7 +51,7 @@ Installation
 * No special file permissions are needed by default. Optional: If you want to have the JavaScript and CSS files minified, the static/asset/ folder has to be writable.
 * To ensure that pastes with an expiration set get cleaned up, define the cron key in the config and set up a cronjob, for example:
   * `*/5 * * * * curl --silent http://yoursite.com/cron/[key]`
-* If you encounter errors with stylesheets and paths, make sure your base_url config value is not empty ( see [here](https://codeigniter.com/userguide3/installation/upgrade_3113.html) ).
+* If you encounter errors with stylesheets and paths, make sure your base_url config value is not empty (see [here](https://codeigniter.com/userguide3/installation/upgrade_303.html)).
 * Be sure to also copy the .htaccess file when you move files around. This is a hidden file and easily overlooked.
 
 
@@ -60,7 +60,7 @@ How to run it in Docker
 
     docker-compose up
 
-This automatically builds the docker-image and fires up nginx, PHP and MariaDB. Access your SNIP instance at http://localhost/.
+This automatically builds the docker-image and fires up Nginx, PHP and MariaDB. Access your SNIP instance at http://localhost/.
 
 All files are served directly; the SNIP-configuration for Docker resides in docker/snip.php
 

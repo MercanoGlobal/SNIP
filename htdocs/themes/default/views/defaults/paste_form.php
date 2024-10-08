@@ -113,14 +113,14 @@
 		<div class="item_group">
 			<div class="item item_captcha">
 				<label for="captcha"><?php echo lang('paste_spam'); ?>
-					<span class="instruction"><?php echo lang('paste_spam_desc'); ?></span>
+					<span class="instruction"><?php if(!$use_recaptcha) { echo lang('paste_spam_desc'); } ?></span>
 				</label>
-<?php if($use_recaptcha){
-    echo recaptcha_get_html($recaptcha_publickey, null, stristr(base_url(), 'https'));
-} else { ?>
-                <img class="captcha" src="<?php echo site_url('view/captcha'); ?>?<?php echo date('U', time()); ?>" alt="captcha" width="180" height="40" />
-                <input value="" type="text" id="captcha" name="captcha" tabindex="2" maxlength="32" />
-<?php } ?>
+				<?php if($use_recaptcha){
+					echo recaptcha_get_html($recaptcha_publickey, null, stristr(base_url(), 'https'));
+				} else { ?>
+					<img class="captcha" src="<?php echo site_url('view/captcha'); ?>?<?php echo date('U', time()); ?>" alt="captcha" width="180" height="40" />
+					<input value="" type="text" id="captcha" name="captcha" tabindex="2" maxlength="32" />
+				<?php } ?>
 			</div>
 		</div>
 <?php } ?>
