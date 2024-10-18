@@ -301,17 +301,19 @@ class Main extends CI_Controller
         if ($this->db->field_exists('snipurl', $db_prefix . 'pastes')) {
             $this->load->dbforge();
 
-            $fields = array(
-                'snipurl' => array(
-                    'type' => 'VARCHAR',
-                    'constraint' => 64,
-                    'null' => true,
-                ),
-            );
+            if (stristr(config_item('db_driver'), 'sqlite') === false) {
+                $fields = array(
+                    'snipurl' => array(
+                        'type' => 'VARCHAR',
+                        'constraint' => 64,
+                        'null' => true,
+                    ),
+                );
 
-            $this->dbforge->modify_column('pastes', $fields);
-            $this->db->where('snipurl', '0');
-            $this->db->update('pastes', array('snipurl' => NULL));
+                $this->dbforge->modify_column('pastes', $fields);
+                $this->db->where('snipurl', '0');
+                $this->db->update('pastes', array('snipurl' => NULL));
+            }
         }
     }
 
