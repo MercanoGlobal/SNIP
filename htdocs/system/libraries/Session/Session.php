@@ -375,34 +375,40 @@ class CI_Session {
 	/**
 	 * Configure session ID length
 	 *
-	 * To make life easier, we used to force SHA-1 and 4 bits per
-	 * character on everyone. And of course, someone was unhappy.
-	 *
-	 * Then PHP 7.1 broke backwards-compatibility because ext/session
-	 * is such a mess that nobody wants to touch it with a pole stick,
-	 * and the one guy who does, nobody has the energy to argue with.
-	 *
-	 * So we were forced to make changes, and OF COURSE something was
-	 * going to break and now we have this pile of shit. -- Narf
+	 * Updated to support PHP 7.0+ while handling the 7.1+ INI changes 
+	 * and avoiding PHP 8.4 deprecation notices.
 	 *
 	 * @return	void
 	 */
 	protected function _configure_sid_length()
 	{
-		$bits_per_character = (int) ini_get('session.sid_bits_per_character');
-		$sid_length         = (int) ini_get('session.sid_length');
-
-		// Enforce defaults only where runtime mutation is allowed
-		if (PHP_VERSION_ID < 80400) {
-			if ($bits_per_character !== 4) {
+		// Enforce legacy defaults (only for PHP 7.1 - 8.3)
+		if (PHP_VERSION_ID >= 70100 && PHP_VERSION_ID < 80400) {
+			if (ini_get('session.sid_bits_per_character') !== '4') {
 				ini_set('session.sid_bits_per_character', '4');
 			}
-			if ($sid_length !== 32) {
+			if (ini_get('session.sid_length') !== '32') {
 				ini_set('session.sid_length', '32');
 			}
 		}
 
-		$this->_sid_regexp = '[0-9a-f]{32}';
+		// Read the actual final configuration
+		$sid_length = (int) @ini_get('session.sid_length');
+		$bits_per_char = (int) @ini_get('session.sid_bits_per_character');
+
+		// Fallback for safety (if ini_get failed or returned 0)
+		$sid_length = ($sid_length > 0) ? $sid_length : 32;
+		$bits_per_char = ($bits_per_char > 0) ? $bits_per_char : 4;
+
+		// Map the alphabet correctly
+		switch ($bits_per_char) {
+			case 4:  $alpha = '0-9a-f'; break;
+			case 5:  $alpha = '0-9a-v'; break;
+			case 6:  $alpha = '0-9a-zA-Z,-'; break;
+			default: $alpha = '0-9a-f';
+		}
+
+		$this->_sid_regexp = '[' . $alpha . ']{' . $sid_length . '}';
 	}
 
 	// ------------------------------------------------------------------------
