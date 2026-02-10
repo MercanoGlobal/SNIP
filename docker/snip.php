@@ -23,7 +23,7 @@ $config['proj_url'] = 'https://github.com/MercanoGlobal/SNIP';
 | The project version.
 |
 */
-$config['proj_version'] = '1.1.1';
+$config['proj_version'] = '1.1.2';
 
 
 /**
@@ -333,7 +333,7 @@ $config['recaptcha_privatekey'] = '';
 $config['disable_api'] = false;
 $config['disable_keep_forever'] = false;
 $config['blocked_words'] = '';
-$config['disallow_search_engines'] = true;
+$config['disallow_search_engines'] = false;
 $config['disable_replies'] = false;
 $config['enable_adminlink'] = false;
 

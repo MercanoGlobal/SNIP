@@ -33,7 +33,7 @@ Prerequisites
 
 * A web server: Apache, LiteSpeed, Nginx, Lighttpd, Cherokee.
 * A database: MySQL / MariaDB, Postgres. OR a writable folder on your filesystem for SQLite.
-* PHP version 7.0 - 8.3.
+* PHP version 7.1 - 8.4.
 * PHP-GD for the creation of QR-codes and Captcha.
 
 
@@ -79,6 +79,11 @@ In the doc/ folder, you will find:
 
 Changelog
 ---------
+
+### Version 1.1.2:
+
+* Added PHP 8.4 compatibility
+* Fixed broken QR images on PHP 8+
 
 ### Version 1.1.1:
 

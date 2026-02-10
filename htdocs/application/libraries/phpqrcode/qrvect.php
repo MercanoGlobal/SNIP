@@ -27,7 +27,7 @@
     class QRvect {
     
         //----------------------------------------------------------------------
-        public static function eps($frame, $filename = false, $pixelPerPoint = 4, $outerFrame = 4,$saveandprint=FALSE, $back_color = 0xFFFFFF, $fore_color = 0x000000, $cmyk = false) 
+        public static function eps($frame, $filename = false, $pixelPerPoint = 4, $outerFrame = 4, $saveandprint = FALSE, $back_color = 0xFFFFFF, $fore_color = 0x000000, $cmyk = false) 
         {
             $vect = self::vectEPS($frame, $pixelPerPoint, $outerFrame, $back_color, $fore_color, $cmyk);
             
@@ -137,7 +137,7 @@
         }
         
         //----------------------------------------------------------------------
-        public static function svg($frame, $filename = false, $pixelPerPoint = 4, $outerFrame = 4,$saveandprint=FALSE, $back_color, $fore_color) 
+        public static function svg($frame, $filename = false, $pixelPerPoint = 4, $outerFrame = 4, $saveandprint = FALSE, $back_color = 0xFFFFFF, $fore_color = 0x000000) 
         {
             $vect = self::vectSVG($frame, $pixelPerPoint, $outerFrame, $back_color, $fore_color);
             
