@@ -113,3 +113,5 @@ Note that, due to the vast amount of modifications, compatibility with older pro
 
 Copy your `application/config/snip.php` / `stikked.php` / `stiqued.php` config file away. Upload the new version.
 If you're upgrading from another project, compare the differences between `stikked.php` / `stiqued.php` and the new `snip.php`, and make the necessary adjustments.
+
+<a href="https://www.buymeacoffee.com/mercanoglobal"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=mercanoglobal&button_colour=FFDD00&font_colour=000000&font_family=Bree&outline_colour=000000&coffee_colour=ffffff" /></a>
